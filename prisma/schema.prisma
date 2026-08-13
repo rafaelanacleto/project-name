@@ -1,0 +1,49 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  // A propriedade 'url' foi removida daqui!
+}
+
+model Account {
+  id          String    @id @default(uuid())
+  name        String
+  description String    @default("")
+  balance     Decimal   @default(0)
+  currency    String    @default("BRL")
+  userId      String    // Removido @db.Uuid
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  transactions Transaction[]
+}
+
+model Transaction {
+  id              String    @id @default(uuid())
+  description     String    @default("")
+  amount          Decimal   @default(0)
+  transactionDate DateTime  @default(now())
+  type            String    // "Income" | "Expense" (SQLite não aceita 'enum')
+  category        String    @default("")
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime? @updatedAt
+
+  accountId       String
+  account         Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String   // ID do Keycloak
+  title     String
+  message   String
+  type      String   // "Alert" | "Success" | "Info"
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
