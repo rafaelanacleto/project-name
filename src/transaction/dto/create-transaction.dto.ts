@@ -9,15 +9,15 @@ export enum TransactionType {
 export class CreateTransactionDto {
  @IsString()
   @IsNotEmpty()
-  description: string | undefined;
+  description: string;
 
   @IsNumber()
   @IsNotEmpty()
-  amount: number | undefined;
+  amount: number;
 
   @IsEnum(TransactionType, { message: 'O tipo deve ser Income ou Expense' })
   @IsNotEmpty()
-  type: TransactionType | undefined;
+  type: TransactionType;
 
   @IsString()
   @IsOptional()
@@ -29,5 +29,5 @@ export class CreateTransactionDto {
 
   @IsUUID()
   @IsNotEmpty()
-  accountId: string | undefined; // ID da conta vinculada
+  accountId: string; // ID da conta vinculada
 }

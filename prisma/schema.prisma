@@ -2,12 +2,10 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
-  // A propriedade 'url' foi removida daqui!
 }
 
 model Account {

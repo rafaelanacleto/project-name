@@ -16,20 +16,20 @@ export class AccountsService {
     return this.prisma.account.findMany();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.prisma.account.findUnique({
       where: { id },
     });
   }
 
-  update(id: number, updateAccountDto: UpdateAccountDto) {
+  update(id: string, updateAccountDto: UpdateAccountDto) {
     return this.prisma.account.update({
       where: { id },
       data: updateAccountDto,
     });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.prisma.account.delete({
       where: { id },
     });
