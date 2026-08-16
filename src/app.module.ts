@@ -8,7 +8,12 @@ import { TransactionModule } from './transaction/transaction.module';
 import { NotificationModule } from './notification/notification.module';
 
 @Module({
-  imports: [AccountsModule, PrismaModule, TransactionModule, NotificationModule],
+  imports: [
+    AccountsModule,
+    PrismaModule,
+    TransactionModule,
+    NotificationModule,
+  ],
   controllers: [AppController, CatsController],
   providers: [AppService],
 })
